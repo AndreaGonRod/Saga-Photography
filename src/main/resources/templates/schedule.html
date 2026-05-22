@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario y Cronograma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            color: #2d3748;
+        }
+
+        .schedule-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .schedule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .schedule-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a202c;
+        }
+
+        .schedule-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .view-toggle {
+            display: flex;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .view-toggle button {
+            padding: 8px 16px;
+            border: none;
+            background: white;
+            color: #718096;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .view-toggle button.active {
+            background: #4299e1;
+            color: white;
+        }
+
+        .view-toggle button:hover:not(.active) {
+            background: #f7fafc;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-input {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+
+        /* Calendar View */
+        .calendar-view {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .calendar-month {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .calendar-nav button {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #4299e1;
+            transition: all 0.2s;
+        }
+
+        .calendar-nav button:hover {
+            background: #edf2f7;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .day-header {
+            text-align: center;
+            font-weight: 600;
+            color: #718096;
+            padding: 12px 0;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            background: white;
+            min-height: 100px;
+        }
+
+        .calendar-day:hover {
+            border-color: #4299e1;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.15);
+        }
+
+        .calendar-day.other-month {
+            color: #cbd5e0;
+            background: #f7fafc;
+        }
+
+        .calendar-day.today {
+            background: #edf2f7;
+            border-color: #4299e1;
+            font-weight: 600;
+        }
+
+        .calendar-day.selected {
+            background: #4299e1;
+            color: white;
+        }
+
+        .day-number {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+
+        .day-events {
+            font-size: 10px;
+            color: #718096;
+        }
+
+        .day-events.has-events {
+            color: #4299e1;
+        }
+
+        /* List View */
+        .list-view {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-hidden {
+            display: none;
+        }
+
+        /* Schedule Entry */
+        .schedule-entry {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+
+        .schedule-entry:hover {
+            border-color: #4299e1;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.1);
+        }
+
+        .entry-time {
+            flex-shrink: 0;
+            min-width: 80px;
+        }
+
+        .entry-date {
+            font-size: 12px;
+            color: #718096;
+            font-weight: 600;
+        }
+
+        .entry-time-range {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-top: 4px;
+        }
+
+        .entry-content {
+            flex: 1;
+        }
+
+        .entry-type-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .entry-type-photoshoot {
+            background: #c3dafe;
+            color: #2c5aa0;
+        }
+
+        .entry-type-event {
+            background: #faf5ff;
+            color: #6b21a8;
+        }
+
+        .entry-type-task {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .entry-type-deadline {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .entry-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 4px;
+        }
+
+        .entry-status {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #edf2f7;
+            color: #4a5568;
+        }
+
+        .entry-actions {
+            flex-shrink: 0;
+            display: flex;
+            gap: 8px;
+        }
+
+        .entry-action-btn {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #4299e1;
+            transition: all 0.2s;
+        }
+
+        .entry-action-btn:hover {
+            background: #edf2f7;
+            border-color: #4299e1;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .empty-state-text {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 48px 24px;
+            color: #718096;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #4299e1;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .schedule-container {
+                padding: 16px;
+            }
+
+            .schedule-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .schedule-controls {
+                width: 100%;
+            }
+
+            .filter-section {
+                width: 100%;
+            }
+
+            .calendar-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 4px;
+            }
+
+            .calendar-day {
+                min-height: 80px;
+                padding: 4px;
+            }
+
+            .day-number {
+                font-size: 11px;
+            }
+
+            .day-events {
+                font-size: 9px;
+            }
+
+            .schedule-entry {
+                flex-direction: column;
+            }
+
+            .entry-time {
+                min-width: auto;
+            }
+
+            .entry-actions {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="schedule-container">
+        <!-- Header -->
+        <div class="schedule-header">
+            <h1 class="schedule-title">Calendario y Cronograma</h1>
+            <div class="schedule-controls">
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="calendar">Calendario</button>
+                    <button class="view-btn" data-view="list">Lista</button>
+                </div>
+                <div class="filter-section">
+                    <select id="typeFilter" class="filter-input">
+                        <option value="">Todos los tipos</option>
+                        <option value="PHOTOSHOOT">Sesiones fotográficas</option>
+                        <option value="EVENT">Eventos</option>
+                        <option value="TASK">Tareas</option>
+                        <option value="DEADLINE">Plazos</option>
+                    </select>
+                    <input type="date" id="dateFilter" class="filter-input" placeholder="Filtrar por fecha">
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar View -->
+        <div id="calendarView" class="calendar-view">
+            <div class="calendar-nav">
+                <button id="prevMonth">← Anterior</button>
+                <div class="calendar-month" id="monthDisplay"></div>
+                <button id="nextMonth">Siguiente →</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+            <div id="calendarEvents" class="schedule-entry" style="margin-bottom: 0; display: none;">
+                <!-- Selected day events will appear here -->
+            </div>
+        </div>
+
+        <!-- List View -->
+        <div id="listView" class="list-view view-hidden">
+            <div id="scheduleList"></div>
+        </div>
+    </div>
+
+    <script>
+        class ScheduleManager {
+            constructor() {
+                this.currentDate = new Date();
+                this.scheduleData = [];
+                this.filteredData = [];
+                this.selectedDate = null;
+                this.init();
+            }
+
+            async init() {
+                this.setupEventListeners();
+                await this.loadSchedule();
+                this.renderCalendar();
+            }
+
+            setupEventListeners() {
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.switchView(e.target.dataset.view));
+                });
+
+                document.getElementById('prevMonth').addEventListener('click', () => this.previousMonth());
+                document.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
+                document.getElementById('typeFilter').addEventListener('change', () => this.applyFilters());
+                document.getElementById('dateFilter').addEventListener('change', () => this.applyFilters());
+            }
+
+            async loadSchedule() {
+                try {
+                    const response = await fetch('/api/schedule');
+                    if (!response.ok) throw new Error('Failed to fetch schedule');
+                    this.scheduleData = await response.json();
+                    this.filteredData = [...this.scheduleData];
+                    this.renderList();
+                } catch (error) {
+                    console.error('Error loading schedule:', error);
+                    this.showError('Error al cargar el cronograma');
+                }
+            }
+
+            applyFilters() {
+                this.filteredData = [...this.scheduleData];
+
+                // Type filter
+                const typeFilter = document.getElementById('typeFilter').value;
+                if (typeFilter) {
+                    this.filteredData = this.filteredData.filter(entry => entry.type === typeFilter);
+                }
+
+                // Date filter
+                const dateFilter = document.getElementById('dateFilter').value;
+                if (dateFilter) {
+                    this.filteredData = this.filteredData.filter(entry => {
+                        const entryDate = this.formatDate(new Date(entry.start));
+                        return entryDate === dateFilter;
+                    });
+                }
+
+                this.renderCalendar();
+                this.renderList();
+            }
+
+            renderCalendar() {
+                const year = this.currentDate.getFullYear();
+                const month = this.currentDate.getMonth();
+
+                // Update month display
+                const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                document.getElementById('monthDisplay').textContent = 
+                    `${monthNames[month]} ${year}`;
+
+                // Get first day of month and number of days
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+                const grid = document.getElementById('calendarGrid');
+                grid.innerHTML = '';
+
+                // Add day headers
+                const dayHeaders = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sab'];
+                dayHeaders.forEach(day => {
+                    const header = document.createElement('div');
+                    header.className = 'day-header';
+                    header.textContent = day;
+                    grid.appendChild(header);
+                });
+
+                // Add previous month days
+                for (let i = firstDay - 1; i >= 0; i--) {
+                    const dayEl = this.createDayElement(daysInPrevMonth - i, true);
+                    grid.appendChild(dayEl);
+                }
+
+                // Add current month days
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const date = new Date(year, month, day);
+                    const dayEl = this.createDayElement(day, false, date);
+                    grid.appendChild(dayEl);
+                }
+
+                // Add next month days
+                const totalCells = grid.children.length - 7; // subtract day headers
+                const remainingCells = 42 - totalCells; // 6 rows * 7 days
+                for (let day = 1; day <= remainingCells; day++) {
+                    const dayEl = this.createDayElement(day, true);
+                    grid.appendChild(dayEl);
+                }
+            }
+
+            createDayElement(day, isOtherMonth = false, date = null) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+
+                if (isOtherMonth) {
+                    dayEl.classList.add('other-month');
+                } else if (date) {
+                    // Check if today
+                    const today = new Date();
+                    if (date.toDateString() === today.toDateString()) {
+                        dayEl.classList.add('today');
+                    }
+
+                    // Get events for this day
+                    const dayEvents = this.getEventsForDate(date);
+                    if (dayEvents.length > 0) {
+                        dayEl.classList.add('has-events');
+                    }
+
+                    dayEl.addEventListener('click', () => this.selectDate(date));
+                }
+
+                dayEl.innerHTML = `
+                    <div class="day-number">${day}</div>
+                    ${date ? `<div class="day-events ${this.getEventsForDate(date).length > 0 ? 'has-events' : ''}">
+                        ${this.getEventsForDate(date).length} evento${this.getEventsForDate(date).length !== 1 ? 's' : ''}
+                    </div>` : ''}
+                `;
+
+                return dayEl;
+            }
+
+            getEventsForDate(date) {
+                const dateStr = this.formatDate(date);
+                return this.filteredData.filter(entry => {
+                    const entryDate = this.formatDate(new Date(entry.start));
+                    return entryDate === dateStr;
+                });
+            }
+
+            selectDate(date) {
+                this.selectedDate = date;
+                this.renderCalendar();
+                const events = this.getEventsForDate(date);
+                const eventsContainer = document.getElementById('calendarEvents');
+
+                if (events.length === 0) {
+                    eventsContainer.style.display = 'none';
+                } else {
+                    eventsContainer.style.display = 'block';
+                    eventsContainer.innerHTML = `
+                        <div style="flex: 1;">
+                            <h3 style="margin-bottom: 12px; font-size: 14px; font-weight: 600; color: #2d3748;">
+                                Eventos para ${this.formatDate(date)}
+                            </h3>
+                            ${events.map(entry => this.renderEntryHtml(entry)).join('')}
+                        </div>
+                    `;
+                }
+
+                // Mark selected date
+                document.querySelectorAll('.calendar-day').forEach(el => {
+                    if (el.querySelector('.day-number')?.textContent == date.getDate() && 
+                        !el.classList.contains('other-month')) {
+                        el.classList.add('selected');
+                    }
+                });
+            }
+
+            renderList() {
+                const listContainer = document.getElementById('scheduleList');
+
+                if (this.filteredData.length === 0) {
+                    listContainer.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📅</div>
+                            <div class="empty-state-title">Sin eventos</div>
+                            <div class="empty-state-text">No hay eventos que coincidan con los filtros aplicados</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Sort by start date
+                const sorted = [...this.filteredData].sort((a, b) => 
+                    new Date(a.start) - new Date(b.start)
+                );
+
+                listContainer.innerHTML = sorted.map(entry => this.renderEntryHtml(entry)).join('');
+            }
+
+            renderEntryHtml(entry) {
+                const startDate = new Date(entry.start.replace(' ', 'T'));
+                const endDate = new Date(entry.end.replace(' ', 'T'));
+
+                return `
+                    <div class="schedule-entry">
+                        <div class="entry-time">
+                            <div class="entry-date">${this.formatDate(startDate)}</div>
+                            <div class="entry-time-range">
+                                ${this.formatTime(startDate)} - ${this.formatTime(endDate)}
+                            </div>
+                        </div>
+                        <div class="entry-content">
+                            <span class="entry-type-badge entry-type-${entry.type.toLowerCase()}">
+                                ${this.getTypeLabel(entry.type)}
+                            </span>
+                            <div class="entry-title">${entry.title}</div>
+                            <div class="entry-status">
+                                ${entry.mainStatus ? `<span class="status-badge">Estado: ${entry.mainStatus}</span>` : ''}
+                                ${entry.taskStatus ? `<span class="status-badge">Tarea: ${entry.taskStatus}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="entry-actions">
+                            <button class="entry-action-btn">Ver</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            switchView(view) {
+                const calendarView = document.getElementById('calendarView');
+                const listView = document.getElementById('listView');
+                const buttons = document.querySelectorAll('.view-btn');
+
+                buttons.forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+
+                if (view === 'calendar') {
+                    calendarView.classList.remove('view-hidden');
+                    listView.classList.add('view-hidden');
+                } else {
+                    calendarView.classList.add('view-hidden');
+                    listView.classList.remove('view-hidden');
+                }
+            }
+
+            previousMonth() {
+                this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+                this.renderCalendar();
+            }
+
+            nextMonth() {
+                this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+                this.renderCalendar();
+            }
+
+            formatDate(date) {
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                return `${year}-${month}-${day}`;
+            }
+
+            formatTime(date) {
+                return date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            }
+
+            getTypeLabel(type) {
+                const labels = {
+                    'PHOTOSHOOT': 'Sesión Fotográfica',
+                    'EVENT': 'Evento',
+                    'TASK': 'Tarea',
+                    'DEADLINE': 'Plazo'
+                };
+                return labels[type] || type;
+            }
+
+            showError(message) {
+                const listContainer = document.getElementById('scheduleList');
+                listContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⚠️</div>
+                        <div class="empty-state-title">Error</div>
+                        <div class="empty-state-text">${message}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new ScheduleManager();
+        });
+    </script>
+</body>
+</html>

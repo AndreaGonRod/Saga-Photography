@@ -1,0 +1,20 @@
+{
+    "client": {
+        "id": 1
+    },
+    "eventId": 16,
+    "photoshootId": null,
+    "dueDate": "15-07-2026",
+    "itemList": [
+        {
+            "taskName": "Selección de fotos",
+            "taskDescription": "Seleccionar 20 fotos para el álbum de la boda de Juan y María.",
+            "status": "REVIEW"
+        },
+        {
+            "taskName": "Retoque básico",
+            "taskDescription": "Ajuste de color y exposición de las fotos seleccionadas.",
+            "status": "IN_QUEUE"
+        }
+    ]
+}

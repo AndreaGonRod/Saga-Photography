@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "name": "Juan",
+    "lastName": "Pérez",
+    "phone": "34600000001",
+    "email": "juan.perez@example.com",
+    "instagramAccounts": [
+      "juan_photo",
+      "juan_personal"
+    ],
+    "notes": "Cliente interesado en sesiones de retrato."
+  },
+  {
+    "id": 2,
+    "name": "María",
+    "lastName": "García",
+    "phone": "34611222333",
+    "email": "m.garcia@test.es",
+    "instagramAccounts": [
+      "mery_garcia"
+    ],
+    "notes": "Prefiere exteriores."
+  },
+  {
+    "id": 3,
+    "name": "Carlos",
+    "lastName": "López",
+    "phone": "34912345678",
+    "email": "clopez@mail.com",
+    "instagramAccounts": [],
+    "notes": "Cliente corporativo."
+  },
+  {
+    "id": 4,
+    "name": "Elena",
+    "lastName": "Ramírez",
+    "phone": "34622333444",
+    "email": "elena.r@provider.com",
+    "instagramAccounts": [
+      "elena_shoots"
+    ],
+    "notes": "Interesada en fotografía de moda."
+  },
+  {
+    "id": 5,
+    "name": "David",
+    "lastName": "Sanz",
+    "phone": "34633444555",
+    "email": "dsanz@company.org",
+    "instagramAccounts": [],
+    "notes": "Necesita fotos para LinkedIn."
+  },
+  {
+    "id": 6,
+    "name": "Lucía",
+    "lastName": "Fernández",
+    "phone": "34644555666",
+    "email": "lucia.fer@gmail.com",
+    "instagramAccounts": [
+      "lu_fernandez"
+    ],
+    "notes": "Sesión familiar en exteriores."
+  },
+  {
+    "id": 9,
+    "name": "Roberto",
+    "lastName": "Sosa",
+    "phone": "34600000004",
+    "email": "rsosa@techsolutions.com",
+    "instagramAccounts": [],
+    "notes": null
+  },
+  {
+    "id": 10,
+    "name": "Ana",
+    "lastName": "García",
+    "phone": "34600000002",
+    "email": "ana.g@example.com",
+    "instagramAccounts": [],
+    "notes": null
+  },
+  {
+    "id": 11,
+    "name": "Sofía",
+    "lastName": "Martínez",
+    "phone": "34600000003",
+    "email": null,
+    "instagramAccounts": [],
+    "notes": "Hija de la clienta principal (id:1)"
+  },
+  {
+    "id": 12,
+    "name": "Laura",
+    "lastName": "Vázquez",
+    "phone": "34600000005",
+    "email": "laura.v@provider.es",
+    "instagramAccounts": [],
+    "notes": null
+  },
+  {
+    "id": 20,
+    "name": "Cristi",
+    "lastName": null,
+    "phone": "34666666666",
+    "email": null,
+    "instagramAccounts": [],
+    "notes": null
+  },
+  {
+    "id": 21,
+    "name": "Jose",
+    "lastName": null,
+    "phone": "34985985985",
+    "email": null,
+    "instagramAccounts": [],
+    "notes": null
+  }
+]

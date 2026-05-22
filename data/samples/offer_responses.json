@@ -1,0 +1,160 @@
+[
+    {
+        "id": 17,
+        "title": "Evento Corporativo TechCorp",
+        "date": "15-05-2026",
+        "startTime": "09:00",
+        "endTime": "13:00",
+        "eventDate": null,
+        "clients": [
+            {
+                "id": 3,
+                "name": "Carlos",
+                "lastName": "López",
+                "phone": "34912345678",
+                "email": "clopez@mail.com",
+                "instagramAccounts": [],
+                "notes": "Cliente corporativo."
+            }
+        ],
+        "offer": {
+            "id": 11,
+            "category": "Corporativo",
+            "subCategory": "Eventos Empresa",
+            "details": "Cobertura 4 horas",
+            "price": 500.00,
+            "defaultTurnAround": 7
+        },
+        "finalPrice": 500.00,
+        "status": "IN_QUEUE",
+        "dueDate": "22-05-2026",
+        "customTurnAround": null,
+        "commercialUsageAuthorized": true,
+        "folderPath": "/2026/eventos/techcorp-mayo",
+        "notes": "Necesitan las fotos en menos de 48 horas.",
+        "createdAt": "16-02-2026 17:53",
+        "updatedAt": null
+    },
+    {
+        "id": 18,
+        "title": "Festival de Verano 2026",
+        "date": "15-07-2026",
+        "startTime": "10:00",
+        "endTime": "23:59",
+        "eventDate": null,
+        "clients": [
+            {
+                "id": 4,
+                "name": "Elena",
+                "lastName": "Ramírez",
+                "phone": "34622333444",
+                "email": "elena.r@provider.com",
+                "instagramAccounts": [
+                    "elena_shoots"
+                ],
+                "notes": "Interesada en fotografía de moda."
+            }
+        ],
+        "offer": {
+            "id": 12,
+            "category": "Eventos",
+            "subCategory": "Festivales",
+            "details": "Día completo 2 fotógrafos",
+            "price": 2500.00,
+            "defaultTurnAround": 15
+        },
+        "finalPrice": 2500.00,
+        "status": "READY",
+        "dueDate": "30-07-2026",
+        "customTurnAround": null,
+        "commercialUsageAuthorized": true,
+        "folderPath": "/2026/eventos/festival-verano",
+        "notes": "Evento multitudinario.",
+        "createdAt": "16-02-2026 17:53",
+        "updatedAt": null
+    },
+    {
+        "id": 16,
+        "title": "Boda de Juan y María",
+        "date": "24-06-2026",
+        "startTime": "12:00",
+        "endTime": "20:00",
+        "eventDate": null,
+        "clients": [
+            {
+                "id": 1,
+                "name": "Juan",
+                "lastName": "Pérez",
+                "phone": "34600000001",
+                "email": "juan.perez@example.com",
+                "instagramAccounts": [
+                    "juan_photo",
+                    "juan_personal"
+                ],
+                "notes": "Cliente interesado en sesiones de retrato."
+            }
+        ],
+        "offer": {
+            "id": 5,
+            "category": "Evento",
+            "subCategory": "Corporativo",
+            "details": "Sesión de 4 horas para conferencias o eventos de empresa.",
+            "price": 500.00,
+            "defaultTurnAround": 10
+        },
+        "finalPrice": 1200.00,
+        "status": "PARTIAL",
+        "dueDate": "04-07-2026",
+        "customTurnAround": null,
+        "commercialUsageAuthorized": true,
+        "folderPath": "/2026/eventos/boda-juan-maria",
+        "notes": "Depósito pagado el 16/02/2026.",
+        "createdAt": "16-02-2026 17:50",
+        "updatedAt": "16-02-2026 17:55"
+    },
+    {
+        "id": 19,
+        "title": "Cristi y Jose",
+        "date": "19-03-2026",
+        "startTime": "10:00",
+        "endTime": "23:59",
+        "eventDate": null,
+        "clients": [
+            {
+                "id": 20,
+                "name": "Cristi",
+                "lastName": null,
+                "phone": "34666666666",
+                "email": null,
+                "instagramAccounts": [],
+                "notes": null
+            },
+            {
+                "id": 21,
+                "name": "Jose",
+                "lastName": null,
+                "phone": "34985985985",
+                "email": null,
+                "instagramAccounts": [],
+                "notes": null
+            }
+        ],
+        "offer": {
+            "id": 15,
+            "category": "Boda",
+            "subCategory": "Reportaje completo con 20% descuento",
+            "details": "Día completo 2 fotógrafos",
+            "price": 1000.00,
+            "defaultTurnAround": 45
+        },
+        "finalPrice": 800.00,
+        "status": null,
+        "dueDate": "03-05-2026",
+        "customTurnAround": null,
+        "commercialUsageAuthorized": true,
+        "folderPath": "/2026/eventos/festival-verano",
+        "notes": "Hemos cambiado de idea en cuanto al depósito, se lo hemos solicitado.",
+        "createdAt": "17-02-2026 13:42",
+        "updatedAt": "17-02-2026 13:50"
+    }
+]

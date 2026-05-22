@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "title": "Reunión Inicial Boda Pérez",
+        "date": "20-03-2026",
+        "startTime": "10:00",
+        "endTime": "11:00",
+        "createdAt": "16-02-2026 12:14",
+        "updatedAt": null
+    },
+    {
+        "id": 2,
+        "title": "Entrega de Material Empresa ABC",
+        "date": "25-03-2026",
+        "startTime": "16:30",
+        "endTime": "17:00",
+        "createdAt": "16-02-2026 12:14",
+        "updatedAt": null
+    },
+    {
+        "id": 3,
+        "title": "Prueba de Vestuario Editorial",
+        "date": "02-04-2026",
+        "startTime": "11:00",
+        "endTime": "13:00",
+        "createdAt": "16-02-2026 12:14",
+        "updatedAt": null
+    },
+    {
+        "id": 17,
+        "title": "Evento Corporativo TechCorp",
+        "date": "15-05-2026",
+        "startTime": "09:00",
+        "endTime": "13:00",
+        "createdAt": "16-02-2026 17:53",
+        "updatedAt": null
+    },
+    {
+        "id": 18,
+        "title": "Festival de Verano 2026",
+        "date": "15-07-2026",
+        "startTime": "10:00",
+        "endTime": "23:59",
+        "createdAt": "16-02-2026 17:53",
+        "updatedAt": null
+    },
+    {
+        "id": 16,
+        "title": "Boda de Juan y María",
+        "date": "24-06-2026",
+        "startTime": "12:00",
+        "endTime": "20:00",
+        "createdAt": "16-02-2026 17:50",
+        "updatedAt": "16-02-2026 17:55"
+    },
+    {
+        "id": 19,
+        "title": "Cristi y Jose",
+        "date": "19-03-2026",
+        "startTime": "10:00",
+        "endTime": "23:59",
+        "createdAt": "17-02-2026 13:42",
+        "updatedAt": "17-02-2026 13:50"
+    }
+]

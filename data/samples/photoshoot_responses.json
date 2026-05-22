@@ -1,0 +1,120 @@
+[
+    {
+        "title": "Pre-boda Exterior Carlos y Ana",
+        "date": "20-05-2026",
+        "startTime": "18:00",
+        "duration": "PT2H",
+        "eventDate": "15-08-2026",
+        "clients": [
+            {
+                "name": "Carlos",
+                "lastName": "Méndez",
+                "phone": "600000001",
+                "email": "carlos.m@example.com"
+            },
+            {
+                "name": "Ana",
+                "lastName": "García",
+                "phone": "600000002",
+                "email": "ana.g@example.com"
+            }
+        ],
+        "offer": {
+            "category": "Retrato",
+            "subCategory": "Pareja Exterior",
+            "price": 250.00,
+            "defaultTurnAround": 20
+        },
+        "finalPrice": 225.00,
+        "commercialUsageAuthorized": true,
+        "folderPath": "/drive/2026/prebodas/carlos_ana",
+        "notes": "Nuevos clientes y nueva oferta. Incluye eventDate (fecha de la boda)."
+    },
+    {
+        "title": "Sesión Exterior Familia Martínez (Ampliación)",
+        "date": "25-06-2026",
+        "startTime": "18:30",
+        "duration": "PT1H30M",
+        "clients": [
+            {
+                "id": 1
+            },
+            {
+                "name": "Sofía",
+                "lastName": "Martínez",
+                "phone": "600000003",
+                "notes": "Hija de Juan Pérez (ID 1)."
+            }
+        ],
+        "offer": {
+            "id": 2
+        },
+        "finalPrice": 180.00,
+        "commercialUsageAuthorized": true,
+        "folderPath": "/drive/2026/familias/martinez_verano",
+        "notes": "Cliente existente (ID 1) y oferta existente (ID 2)."
+    },
+    {
+        "title": "Retrato Corporativo Roberto Sosa - Perfil PRO",
+        "date": "08-07-2026",
+        "startTime": "09:00",
+        "duration": "PT2H",
+        "clients": [
+            {
+                "name": "Roberto",
+                "lastName": "Sosa",
+                "phone": "600000004",
+                "email": "rsosa@techsolutions.com"
+            }
+        ],
+        "offer": {
+            "id": 1
+        },
+        "finalPrice": 250.00,
+        "commercialUsageAuthorized": false,
+        "folderPath": "/drive/2026/corporativo/roberto_sosa",
+        "notes": "Nuevo cliente. Título único para evitar conflictos con intentos previos."
+    },
+    {
+        "title": "Sesión Editorial Moda Elena Ramírez",
+        "date": "15-07-2026",
+        "startTime": "10:00",
+        "duration": "PT4H",
+        "clients": [
+            {
+                "id": 4
+            }
+        ],
+        "offer": {
+            "id": 3
+        },
+        "finalPrice": 600.00,
+        "commercialUsageAuthorized": true,
+        "folderPath": "/drive/2026/editorial/elena_r",
+        "notes": "Cliente existente (Elena Ramírez, ID 4)."
+    },
+    {
+        "title": "Sesión Boudoir Privada Laura Vázquez",
+        "date": "20-07-2026",
+        "startTime": "11:00",
+        "duration": "PT2H",
+        "clients": [
+            {
+                "name": "Laura",
+                "lastName": "Vázquez",
+                "phone": "600000005",
+                "email": "laura.v@provider.es"
+            }
+        ],
+        "offer": {
+            "category": "Privado",
+            "subCategory": "Boudoir Premium",
+            "price": 450.00,
+            "defaultTurnAround": 30
+        },
+        "finalPrice": 450.00,
+        "commercialUsageAuthorized": false,
+        "folderPath": "/drive/2026/privado/laura_v",
+        "notes": "Nueva clienta y oferta personalizada."
+    }
+]

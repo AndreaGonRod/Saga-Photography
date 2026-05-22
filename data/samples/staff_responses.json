@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Ana",
+        "lastName": "Martínez",
+        "phone": "34655444333",
+        "email": "ana.staff@saga.com",
+        "notes": "Fotógrafa principal."
+    },
+    {
+        "id": 2,
+        "name": "Roberto",
+        "lastName": "Sánchez",
+        "phone": "34677888999",
+        "email": "roberto.edit@saga.com",
+        "notes": "Editor de vídeo y retoque."
+    },
+    {
+        "id": 3,
+        "name": "Laura",
+        "lastName": "Gómez",
+        "phone": "34688111222",
+        "email": "laura.g@saga.com",
+        "notes": "Especialista en iluminación."
+    },
+    {
+        "id": 4,
+        "name": "Miguel",
+        "lastName": "Ángel",
+        "phone": "34699333444",
+        "email": "miguel.a@saga.com",
+        "notes": "Asistente de fotografía."
+    },
+    {
+        "id": 5,
+        "name": "Sofía",
+        "lastName": "Ruiz",
+        "phone": "34611555666",
+        "email": "sofia.r@saga.com",
+        "notes": "Maquilladora y estilista."
+    }
+]
