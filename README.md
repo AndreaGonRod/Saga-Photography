@@ -1,6 +1,6 @@
 # Saga API - Gestión para Fotógrafos
 
-API REST full-stack con **Java**, **Spring Boot** y **H2** para centralizar y automatizar el flujo de trabajo de un estudio fotográfico.
+API REST con **Java**, **Spring Boot** y **PostgreSQL** para centralizar y automatizar el flujo de trabajo de un estudio fotográfico.
 
 ## Funcionalidades
 
